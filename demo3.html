@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>handlebars-demo</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo {
+            width: 500px;
+            height: 200px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="demo">
+    <h1>each-嵌套</h1>
+    <div id="dataList"></div>
+</div>
+
+<!--Handlebars.js模版-->
+<!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+<!--id可以用来唯一确定一个模版,type是模版固定的写法-->
+<script id="table-template" type="text/x-handlebars-template">
+    <!--#each可以理解成循环命令，循环的是json对象中的student属性-->
+    {{#each student}}
+    {{#each grade}}
+    {{../name}}的{{语文}}<br>
+    {{../name}}的{{数学}}<br>
+    {{../name}}的{{英语}}<br>
+    {{/each}}
+    {{/each}}
+</script>
+<!--进行数据处理、html构造-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //模拟的json对象
+        var data = {
+            "student": [
+                {
+                    "name": "张三",
+                    "grade": [{
+                        "语文": "89",
+                        "数学": "87",
+                        "英语": "45"
+                    }]
+                },
+                {
+                    "name": "李四",
+                    "grade": [{
+                        "语文": "89",
+                        "数学": "87",
+                        "英语": "45"
+                    }]
+                },
+                {
+                    "name": "妞妞",
+                    "grade": [{
+                        "语文": "89",
+                        "数学": "87",
+                        "英语": "45"
+                    }]
+                }
+            ]
+        };
+
+        //注册一个Handlebars模版，通过id找到某一个模版，获取模版的html框架
+        var myTemplate = Handlebars.compile($("#table-template").html());
+
+        //将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础table中。
+        $('#dataList').html(myTemplate(data));
+    });
+</script>
+</body>
+</html>
