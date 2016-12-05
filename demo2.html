@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>handlebars-demo</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo {
+            width: 500px;
+            height: 200px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="demo">
+    <h1>each-基本循环使用方法</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>语文</th>
+            <th>数学</th>
+            <th>英语</th>
+            <th>物理</th>
+            <th>化学</th>
+        </tr>
+        </thead>
+        <tbody id="gradList">
+        </tbody>
+    </table>
+</div>
+
+<!--Handlebars.js模版-->
+<!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+<!--id可以用来唯一确定一个模版,type是模版固定的写法-->
+<script id="table-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <tr>
+        <td>{{语文}}</td>
+        <td>{{数学}}</td>
+        <td>{{英语}}</td>
+        <td>{{物理}}</td>
+        <td>{{化学}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<!--进行数据处理、html构造-->
+<script>
+    $(document).ready(function () {
+        var data = [
+            {
+                "语文": "89",
+                "数学": "87",
+                "英语": "45",
+                "物理": "75",
+                "化学": "95"
+            },
+            {
+                "语文": "89",
+                "数学": "87",
+                "英语": "45",
+                "物理": "75",
+                "化学": "95"
+            },
+            {
+                "语文": "89",
+                "数学": "87",
+                "英语": "45",
+                "物理": "75",
+                "化学": "95"
+            }
+        ];
+
+        //注册一个Handlebars模版，通过id找到某一个模版，获取模版的html框架
+        var gradTemplate = Handlebars.compile($('#table-template').html());
+
+        $('#gradList').html(gradTemplate(data));
+
+    })
+</script>
+</body>
+</html>

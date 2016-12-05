@@ -17,7 +17,7 @@
 <body>
 <div class="demo">
     <h1>each-基本循环使用方法</h1>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>姓名</th>
@@ -29,6 +29,10 @@
         </tbody>
     </table>
 </div>
+
+<!--Handlebars.js模版-->
+<!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+<!--id可以用来唯一确定一个模版,type是模版固定的写法-->
 <script id="table-template" type="text/x-handlebars-template">
     <!--#each可以理解成循环命令，循环的是json对象中的student属性-->
     {{#each student}}
